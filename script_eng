@@ -1,0 +1,40 @@
+# STEP 1 -- Import modules.
+
+import tkinter
+import pyautogui
+import pyperclip
+import keyboard
+
+# STEP 2 -- Create our window.
+
+root = tkinter.Tk()
+root.title("Coord by Hu Bots")
+root.geometry("400x150")
+root.config(bg="#201c1c")
+
+#STEP 3 -- XY Label
+
+xy_lb = tkinter.Label(root, text="X, Y")
+xy_lb.config(bg="#201c1c", font=("fira code", 35), fg="white")
+xy_lb.pack()
+
+#STEP 4 -- Instructions Label
+
+ins_lb = tkinter.Label(root, text="Press 'f2' to copy the coordinates.")
+ins_lb.config(bg="#201c1c", font=("calibri", 13), fg="white")
+ins_lb.pack()
+
+#STEP 5 -- Show coordinates.
+
+while True:
+    x, y = pyautogui.position() #get coordinates
+
+    xy_lb.config(text="{},{}".format(x, y))
+    root.update()
+
+    #STEP 6 -- Copy coordinates.
+
+    if keyboard.is_pressed("f2"):
+        pyperclip.copy("{},{}".format(x, y))
+
+root.mainloop()
